@@ -2,7 +2,7 @@
 
 ## [Bandit Level 0 → Level 1](http://overthewire.org/wargames/bandit/bandit1.html)
 
-## solution:
+#### solution:
 ```
 ssh -p 2220 bandit0@bandit.labs.overthewire.org
 ```
