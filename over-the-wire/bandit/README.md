@@ -129,3 +129,88 @@ The password is IFukwKGsFW8MOq3IRFqrxE1hxTNEbUPR
 bandit11@bandit:~$ cat data.txt | tr 'a-zA-Z' 'n-za-mN-ZA-M'
 The password is 5Te8Y4drgCRfCx8ugdwuEX8KFC6k2EUu
 ```
+
+## [Bandit Level 12 → Level 13](http://overthewire.org/wargames/bandit/bandit13.html)
+
+## Solution:
+```bash
+bandit12@bandit:~$ mkdir /tmp/some-unique-dir
+bandit12@bandit:~$ cp data.txt /tmp/some-unique-dir
+bandit12@bandit:~$ cd /tmp/some-unique-dir
+bandit12@bandit:/tmp/some-unique-dir$ xxd -r data.txt dump
+bandit12@bandit:/tmp/some-unique-dir$ file dump
+dump: gzip compressed data, was "data2.bin", last modified: Tue Oct 16 12:00:23 2018, max compression, from Unix
+bandit12@bandit:/tmp/some-unique-dir$ mv dump dump.gz
+bandit12@bandit:/tmp/some-unique-dir$ gzip -d dump.gz 
+bandit12@bandit:/tmp/some-unique-dir$ ls
+data.txt  dump
+bandit12@bandit:/tmp/some-unique-dir$ file dump
+dump: bzip2 compressed data, block size = 900k
+bandit12@bandit:/tmp/some-unique-dir$ mv dump dump.bz
+bandit12@bandit:/tmp/some-unique-dir$ bzip2 -d dump.bz
+bandit12@bandit:/tmp/some-unique-dir$ ls
+data.txt  dump
+bandit12@bandit:/tmp/some-unique-dir$ file dump
+dump: gzip compressed data, was "data4.bin", last modified: Tue Oct 16 12:00:23 2018, max compression, from Unix
+bandit12@bandit:/tmp/some-unique-dir$ mv dump dump.gz
+bandit12@bandit:/tmp/some-unique-dir$ gzip -d dump.gz 
+bandit12@bandit:/tmp/some-unique-dir$ ls
+data.txt  dump
+bandit12@bandit:/tmp/some-unique-dir$ file dump
+dump: POSIX tar archive (GNU)
+bandit12@bandit:/tmp/some-unique-dir$ mv dump dump.tar
+bandit12@bandit:/tmp/some-unique-dir$ tar -xf dump.tar 
+bandit12@bandit:/tmp/some-unique-dir$ ls
+data5.bin  data.txt  dump.tar
+bandit12@bandit:/tmp/some-unique-dir$ file data5.bin 
+data5.bin: POSIX tar archive (GNU)
+bandit12@bandit:/tmp/some-unique-dir$ mv data5.bin data5.tar
+bandit12@bandit:/tmp/some-unique-dir$ tar -xf data5.tar
+bandit12@bandit:/tmp/some-unique-dir$ ls
+data5.tar  data6.bin  data.txt  dump.tar
+bandit12@bandit:/tmp/some-unique-dir$ file data6.bin
+data6.bin: bzip2 compressed data, block size = 900k
+bandit12@bandit:/tmp/some-unique-dir$ mv data6.bin data6.bz
+bandit12@bandit:/tmp/some-unique-dir$ bzip2 -d data6.bz
+bandit12@bandit:/tmp/some-unique-dir$ ls
+data5.tar  data6  data.txt  dump.tar
+bandit12@bandit:/tmp/some-unique-dir$ file data6
+data6: POSIX tar archive (GNU)
+bandit12@bandit:/tmp/some-unique-dir$ mv data6 data6.tar
+bandit12@bandit:/tmp/some-unique-dir$ tar -xf data6.tar 
+bandit12@bandit:/tmp/some-unique-dir$ ls
+data5.tar  data6.tar  data8.bin  data.txt  dump.tar
+bandit12@bandit:/tmp/some-unique-dir$ file data8.bin 
+data8.bin: gzip compressed data, was "data9.bin", last modified: Tue Oct 16 12:00:23 2018, max compression, from Unix
+bandit12@bandit:/tmp/some-unique-dir$ mv data8.bin data8.gz
+bandit12@bandit:/tmp/some-unique-dir$ gzip -d data8.gz 
+bandit12@bandit:/tmp/some-unique-dir$ ls
+data5.tar  data6.tar  data8  data.txt  dump.tar
+bandit12@bandit:/tmp/some-unique-dir$ file data8
+data8: ASCII text
+bandit12@bandit:/tmp/some-unique-dir$ cat data8
+The password is 8ZjyCRiBWFYkneahHwxCv3wb2a1ORpYL
+```
+
+## [Bandit Level 13 → Level 14](http://overthewire.org/wargames/bandit/bandit14.html)
+
+## Solution:
+```bash
+bandit13@bandit:~$ ssh -i sshkey.private bandit14@localhost
+bandit14@bandit:~$ cat /etc/bandit_pass/bandit14 
+4wcYUJFw0k0XLShlDzztnTBHiqxU3b3e
+```
+
+## [Bandit Level 14 → Level 15](http://overthewire.org/wargames/bandit/bandit15.html)
+
+## Solution:
+```bash
+bandit14@bandit:~$ nc localhost 30000
+4wcYUJFw0k0XLShlDzztnTBHiqxU3b3e
+Correct!
+BfMYroe26WYalil77FoDi9qh59eK5xNr
+```
+
+## [Bandit Level 15 → Level 16](http://overthewire.org/wargames/bandit/bandit16.html)
+
+## Solution:
