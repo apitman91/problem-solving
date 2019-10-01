@@ -478,3 +478,156 @@ GbKksEFF4yrVs6il55v6gwY5aVje5f0j
 ## [Bandit Level 20 → Level 21](http://overthewire.org/wargames/bandit/bandit21.html)
 
 ### Solution:
+```bash
+bandit20@bandit:~$ nc -l -p 1234 < /etc/bandit_pass/bandit20 &
+[2] 16018
+bandit20@bandit:~$ ./suconnect 1234
+Read: GbKksEFF4yrVs6il55v6gwY5aVje5f0j
+Password matches, sending next password
+gE269g2h3mw3pwgrj0Ha9Uoqen1c9DGr
+```
+
+## [Bandit Level 21 → Level 22](http://overthewire.org/wargames/bandit/bandit22.html)
+
+### Solution:
+```bash
+bandit21@bandit:/etc/cron.d$ ls /etc/cron.d
+cronjob_bandit22  cronjob_bandit23  cronjob_bandit24
+bandit21@bandit:/etc/cron.d$ cat /etc/cron.d/cronjob_bandit22
+@reboot bandit22 /usr/bin/cronjob_bandit22.sh &> /dev/null
+* * * * * bandit22 /usr/bin/cronjob_bandit22.sh &> /dev/null
+bandit21@bandit:/etc/cron.d$ cat /usr/bin/cronjob_bandit22.sh
+#!/bin/bash
+chmod 644 /tmp/t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv
+cat /etc/bandit_pass/bandit22 > /tmp/t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv
+bandit21@bandit:/etc/cron.d$ cat /tmp/t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv
+Yk7owGAcWjwMVRwrTesJEwB7WVOiILLI
+```
+
+## [Bandit Level 22 → Level 23](http://overthewire.org/wargames/bandit/bandit23.html)
+
+### Solution:
+```
+bandit22@bandit:~$ cat /usr/bin/cronjob_bandit23.sh 
+#!/bin/bash
+
+myname=$(whoami)
+mytarget=$(echo I am user $myname | md5sum | cut -d ' ' -f 1)
+
+echo "Copying passwordfile /etc/bandit_pass/$myname to /tmp/$mytarget"
+
+cat /etc/bandit_pass/$myname > /tmp/$mytarget
+bandit22@bandit:~$ myname=bandit23
+bandit22@bandit:~$ mytarget=$(echo I am user $myname | md5sum | cut -d ' ' -f 1)
+bandit22@bandit:~$ echo $mytarget
+8ca319486bfbbc3663ea0fbe81326349
+bandit22@bandit:~$ cat /tmp/8ca319486bfbbc3663ea0fbe81326349
+jc1udXuA1tiHqjIsL8yaapX5XIAI6i0n
+```
+
+# REDO 23-24
+
+UoMYTrfrBFHyQXmg6gzctqAwOmw1IohZ
+
+## [Bandit Level 24 → Level 25](http://overthewire.org/wargames/bandit/bandit25.html)
+
+### Solution:
+
+```bash
+bandit24@bandit:~$ mkdir /tmp/pit24
+bandit24@bandit:~$ for i in {0000..9999}
+> do
+> echo UoMYTrfrBFHyQXmg6gzctqAwOmw1IohZ $i >> /tmp/pit24/out
+> done
+bandit24@bandit:~$ cat /tmp/pit24/out | nc localhost 30002 | grep password
+I am the pincode checker for user bandit25. Please enter the password for user bandit24 and the secret pincode on a single line, separated by a space.
+The password of user bandit25 is uNG9O58gUE7snukf3bvZ0rxhtnjzSGzG
+```
+
+## [Bandit Level 25 → Level 26](http://overthewire.org/wargames/bandit/bandit26.html)
+
+### Solution:
+
+5czgV9L3Xx8JPOyRbXh6lQbmIOWvPT6Z
+
+## [Bandit Level 26 → Level 27](http://overthewire.org/wargames/bandit/bandit27.html)
+
+### Solution:
+
+```bash
+bandit26@bandit:~$ ./bandit27-do 
+Run a command as another user.
+  Example: ./bandit27-do id
+bandit26@bandit:~$ ./bandit27-do cat /etc/bandit_pass/bandit27
+3ba3118a22e93127a4ed485be72ef5ea
+```
+
+## [Bandit Level 27 → Level 28](http://overthewire.org/wargames/bandit/bandit28.html)
+
+### Solution:
+```
+bandit27@bandit:~$ mkdir /tmp/pit27
+bandit27@bandit:~$ cd /tmp/pit27
+bandit27@bandit:/tmp/pit27$ git clone ssh://bandit27-git@localhost/home/bandit27-git/repo
+Cloning into 'repo'...
+Could not create directory '/home/bandit27/.ssh'.
+The authenticity of host 'localhost (127.0.0.1)' can't be established.
+ECDSA key fingerprint is SHA256:98UL0ZWr85496EtCRkKlo20X3OPnyPSB5tB5RPbhczc.
+Are you sure you want to continue connecting (yes/no)? yes
+Failed to add the host to the list of known hosts (/home/bandit27/.ssh/known_hosts).
+This is a OverTheWire game server. More information on http://www.overthewire.org/wargames
+
+bandit27-git@localhost's password: 
+remote: Counting objects: 3, done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 3 (delta 0), reused 0 (delta 0)
+Receiving objects: 100% (3/3), done.
+bandit27@bandit:/tmp/pit27$ ls
+repo
+bandit27@bandit:/tmp/pit27$ cd repo
+bandit27@bandit:/tmp/pit27/repo$ ls
+README
+bandit27@bandit:/tmp/pit27/repo$ cat README 
+The password to the next level is: 0ef186ac70e04ea33b4c1853d2526fa2
+```
+
+## [Bandit Level 28 → Level 29](http://overthewire.org/wargames/bandit/bandit29.html)
+
+### Solution:
+
+```bash
+bandit28@bandit:/tmp/pit28/repo$ cat README.md 
+# Bandit Notes
+Some notes for level29 of bandit.
+
+## credentials
+
+- username: bandit29
+- password: xxxxxxxxxx
+
+bandit28@bandit:/tmp/pit28/repo$ git log --oneline
+073c27c fix info leak
+186a103 add missing data
+b67405d initial commit of README.md
+bandit28@bandit:/tmp/pit28/repo$ git checkout 186a103
+Note: checking out '186a103'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by performing another checkout.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -b with the checkout command again. Example:
+
+  git checkout -b <new-branch-name>
+
+HEAD is now at 186a103... add missing data
+bandit28@bandit:/tmp/pit28/repo$ cat README.md 
+# Bandit Notes
+Some notes for level29 of bandit.
+
+## credentials
+
+- username: bandit29
+- password: bbc96594b4e001778eee9975372716b2
+```
